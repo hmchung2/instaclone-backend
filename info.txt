@@ -1,0 +1,7 @@
+#3.0
+-- setup
+git init
+git remote add origin git@github.com:hmchung2/instaclone-backend.git
+npm init -y
+
+
