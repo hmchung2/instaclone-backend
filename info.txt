@@ -13,7 +13,7 @@ npm install apollo-server graphql
 -- install nodemon to let server restart immediately
 npm i nodemon --save-dev
 
-#3.2
+#3.2- 3.3
 - Babel
 
 -- to import outside a module, put following in the package.json
@@ -31,4 +31,67 @@ npm install @babel/node --save-dev
 
 -- babel is js compiler. 
 
+#3.4
+- Prisma
+-- Write graphQL and prima will create database reading my configuration
 
+-- install Prisma
+ npm install prisma -D
+
+-- start
+npx prisma init
+
+
+--postgresql setup
+
+
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+sudo passwd postgres
+su - postgres
+
+    createuser pgadmin
+    psql
+        ALTER USER pgadmin WITH ENCRYPTED password 'secure_password';
+        CREATE DATABASE instaclone OWNER pgadmin;
+        GRANT ALL PRIVILEGES ON DATABASE instaclone to pgadmin;
+        \q
+    exit
+sudo uft allow http
+sudo ufw allow http
+sudo ufw allow https
+
+
+start pgadmin4
+    register server
+        connections : host ip (localhost), Maintanance db -> instaclone , password -> 'secure_password'
+        create
+
+
+-- .env
+configure as following
+DATABASE_URL="postgresql://pgadmin:randompassword@localhost:5432/instaclone?schema=public"
+
+#3.5
+- Prisma Migrate
+
+-- install extension prisma
+
+-- Example prisma module
+model Movie {
+  id        Int      @id @default(autoincrement())
+  title     String
+  year      Int
+  genre     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+-- allow user to create db
+sudo -u postgres psql postgres
+ALTER USER pgadmin CREATEDB;
+
+-- prisma migrate command
+npx prisma migrate dev --name init
+
+--- "dev" generates prisma client 
