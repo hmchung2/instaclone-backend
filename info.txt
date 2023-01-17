@@ -94,4 +94,21 @@ ALTER USER pgadmin CREATEDB;
 -- prisma migrate command
 npx prisma migrate dev --name init
 
---- "dev" generates prisma client 
+--- "dev" generates prisma client
+
+#3.6
+- Prisma Client
+
+-- create client
+const client = new PrismaClient();
+
+-- use client in resolvers
+movies: () => client.movie.findMany(),
+
+#3.7
+- prisma studio
+npx prisma studio
+
+-- web version of database studio
+
+-- can edit db from web
