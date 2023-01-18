@@ -96,7 +96,7 @@ npx prisma migrate dev --name init
 
 --- "dev" generates prisma client
 
-#3.6
+#3.6 - 3.7
 - Prisma Client
 
 -- create client
@@ -105,10 +105,33 @@ const client = new PrismaClient();
 -- use client in resolvers
 movies: () => client.movie.findMany(),
 
-#3.7
+#3.8
 - prisma studio
 npx prisma studio
 
 -- web version of database studio
 
 -- can edit db from web
+
+#3.9 - 3.10
+- Architecture
+
+-- graphqltool bring all together
+
+-- install graphqltool
+npm install @graphql-tools/schema @graphql-tools/load-files @graphql-tools/merge
+
+loadFilesSync
+mergeTypeDefs
+mergeResolvers
+makeExecutableSchema
+
+
+#3.9
+- Dotenv
+--read variables from virtual env
+npm i dotenv
+
+-- add import dotenv at top in application
+
+-- now you can chage ports in .env file
