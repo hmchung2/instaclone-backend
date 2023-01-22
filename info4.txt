@@ -1,0 +1,83 @@
+#4.0 Create Account 1
+
+- push to db after change in schema
+npx prisma db push
+
+#4.1 Create Account 2
+
+- conditions in findFirst
+-- or Example
+const existingUser = await client.user.findFirst({
+where: {
+    OR: [{ userName }, { email }],
+},
+});
+
+#4.2 Create Account 3
+
+- install hash package
+npm i bcrypt
+
+- hash password
+
+const uglyPassword = await bcrypt.hash(password, 10);
+
+#4.3 seeProfile
+
+- findunique only works on unique columns
+
+- throw error in try catch when async mutation
+
+#4.4 login
+
+-check password with bcrypt
+const passwordOk = await bcrypt.compare(password, user.password);
+
+- issue token
+-- use json web token
+npm install jsonwebtoken
+
+#4.5 login 2
+
+- token sign
+-- password for signing token to verify that this tokken was modifed by us
+-- tokken is not secret information and anybody can see the data
+const token = await jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+
+- jsonwebtoken has token expire function as well
+
+#4.6 Divde and conquer
+- divde each service into separate folders
+
+
+#4.7 updateProfile
+
+- undefined value in the prsima data do not go to database
+-- following does not update to undefined in db
+
+client.user.update({
+        where: {
+          id: 1,
+        },
+        data: {
+          firstName,
+          lastName,
+          userName,
+          email,
+          password,
+        },
+      });
+
+- a way to change parameter name without null problem
+...(uglyPassword && { password: uglyPassword }),
+
+#4.8 authentication 1
+
+
+
+
+
+
+
+
+
