@@ -18,7 +18,7 @@ export default {
       }
 
       const passwordOk = await bcrypt.compare(password, user.password);
-      console.log(passwordOk);
+
       if (!passwordOk) {
         return {
           ok: false,

@@ -73,11 +73,74 @@ client.user.update({
 
 #4.8 authentication 1
 
+-- verify token
+const { id } = await jwt.verify(token, process.env.SECRET_KEY);
+
+#4.8 authentication 2
+
+-send token automatically
+
+- use httpHeaders to send token
+
+- whatever put in context is available in every resolver if you put it in context
+-- apollo server context part
+
+-- put context in server
+const server = new ApolloServer({
+  schema,
+  context: {
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc0NDA1NjY5fQ.tJpM8k_gyOyA3jAjreMF8lu1tsVJkSD52Jv4ontlU-I",
+  },
+});
+
+#4.10 authentication 3
+
+- context can be a function
+-- get token from http headers
+
+const server = new ApolloServer({
+  schema,
+  context: async ({ req }) => {
+    return {
+      loggedInUser: await getUser(req.headers.token),
+    };
+  },
+});
+
+#4.11 protect resolvers 1
+- add error function in the context
+- then use the function in mutation
+
+#4.12
+- put resolver insdie resolver
+-- utils
+export const protectedResolver =
+  (ourResolver) => (root, args, context, info) => {
+    if (!context.loggedInUser) {
+      return {
+        ok: false,
+        error: "Please, login to perform this action",
+      };
+    }
+    return ourResolver(root, args, context, info);
+  };
+
+-- put the resolver function inside the util function
+
+#4.13 Recap
+
+#4.14 File upload 1
+- put resolvers and  typdefs seprately to get extra features from apollo instead of using excutable schema
+-- you can use upload feature 
+
+#4.15 file upload 2
+- user node 14 version
+nvm use v14.9.0
+use apollo server version 2 for upload
+
+- install altair
+- use altair to test uploading file
 
 
-
-
-
-
-
-
+#4.16 file upload 3
