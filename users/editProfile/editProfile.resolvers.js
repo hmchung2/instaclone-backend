@@ -1,3 +1,4 @@
+import { createWriteStream } from "fs";
 import client from "../../client";
 import bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
@@ -28,8 +29,15 @@ export default {
 
         // console.log("user token");
         // console.log(loggedInUser);
-        console.log("avatar");
-        console.log(avatar);
+
+        const { filename, createReadStream } = await avatar;
+        const readStream = createReadStream();
+
+        const writeStream = createWriteStream(
+          process.cwd() + "/uploads/" + filename
+        );
+
+        readStream.pipe(writeStream);
 
         let uglyPassword = null;
         if (newPassword) {

@@ -134,6 +134,9 @@ export const protectedResolver =
 - put resolvers and  typdefs seprately to get extra features from apollo instead of using excutable schema
 -- you can use upload feature 
 
+-next time try to use apollo server 3.7
+
+
 #4.15 file upload 2
 - user node 14 version
 nvm use v14.9.0
@@ -144,3 +147,63 @@ use apollo server version 2 for upload
 
 
 #4.16 file upload 3
+
+- use node 14.17.0
+or
+- use node 14.15.1
+
+- include in package.json
+
+  "resolutions": {
+    "fs-capacitor" : "^6.2.0",
+    "graphql-upload" : "^11.0.0"
+  }
+
+- include in scripts in package.json
+"preinstall" : "npx npm-force-resolutions",
+
+- delete node_modules folder
+
+- install again
+npm i
+
+
+- now log the steam function
+const { filename, createReadStream } = await avatar;
+const stream = createReadStream();
+
+
+
+#4.17 file upload 4
+
+- pipe the files between readstream and writesteam
+
+const readStream = createReadStream();
+const writeStream = createWriteStream(
+  process.cwd() + "/uploads/" + filename
+);
+readStream.pipe(writeStream);
+
+- use apollo server express to configure everything such as building middleware
+
+#4.18 ejecting from apollo server
+- install express
+npm i express apollo-server-express
+
+
+-modify server
+const app = express();
+server.applyMiddleware({ app });
+app.listen({ port: PORT }, () => {
+  console.log(`🚀Server is running on http://localhost:${PORT} ✅`);
+});
+
+-install morgan
+npm i morgan
+
+-apply morgan
+app.use(logger("tiny"));
+-- this shows logs in the server
+
+
+
