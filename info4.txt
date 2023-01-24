@@ -150,7 +150,7 @@ use apollo server version 2 for upload
 
 - use node 14.17.0
 or
-- use node 14.15.1
+- use node 14.15.1 // by nomad
 
 - include in package.json
 
@@ -205,5 +205,6 @@ npm i morgan
 app.use(logger("tiny"));
 -- this shows logs in the server
 
-
-
+#4.19 Changing Avatar
+- expose file into web
+app.use(express.static("folder name"));
