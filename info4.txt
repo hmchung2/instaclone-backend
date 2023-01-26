@@ -208,3 +208,12 @@ app.use(logger("tiny"));
 #4.19 Changing Avatar
 - expose file into web
 app.use(express.static("folder name"));
+
+#4.20 Follower 1
+
+- many to many
+
+-- following User[]   @relation("FollowRelation")
+-- they have to same name (Ex. FollowRelation) to keep the following relation
+
+- you can see relationship and edit relation in prisma studio
