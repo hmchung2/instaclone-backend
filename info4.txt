@@ -295,3 +295,20 @@ await client.user.update({
         where: { userName },
         select: { id: true },
       });
+
+#4.25 following pagination
+
+- cursor pagination
+-- tell db where the last select result was
+      const following = await client.user
+        .findUnique({
+          where: { userName },
+        })
+        .following({
+          take: 5,
+          skip: lastId ? 1 : 0,
+          ...(lastId && { cursor: { id: lastId } }),
+        });
+
+- cursor pagination is good for infinite scroll
+
