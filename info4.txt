@@ -312,3 +312,69 @@ await client.user.update({
 
 - cursor pagination is good for infinite scroll
 
+#4.26 computed Fields 1
+
+- make resolver for type Fields
+- then when query happens, graphql looks for db but it does not exist in db
+- therefore graph then looks at resolver to return
+
+
+#4.27 computed Fields 2
+
+- use root parameter (root, args)
+- too see following count , search followers where some have the root's id
+- vice versa
+
+  User: {
+    totalFollowing: ({ id }) =>
+      client.user.count({
+        where: {
+          followers: {
+            some: {
+              id,
+            },
+          },
+        },
+      }),
+    totalFollowers: ({ id }) =>
+      client.user.count({
+        where: {
+          following: {
+            some: {
+              id,
+            },
+          },
+        },
+      }),
+  },
+
+- however ,this is not good for too big data which will fry the db
+
+- isMe?
+    isMe: ({ id }, _, { loggedInUser }) => {
+      if (!loggedInUser) {
+        return false;
+      }
+      return id === loggedInUser.id;
+    },
+
+
+#4.28 computed Fields 3
+
+- if following?
+-- check if loggedin user following root's id (current id)
+-- return length for Boolean
+    isFollowing: async ({ id }, _, { loggedInUser }) => {
+      if (!loggedInUser) {
+        return false;
+      }
+      const exists = await client.user
+        .findUnique({ where: { userName: loggedInUser.userName } })
+        .following({
+          where: {
+            id,
+          },
+        });
+
+      return exists.length;
+

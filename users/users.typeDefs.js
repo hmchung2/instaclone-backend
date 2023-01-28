@@ -14,5 +14,9 @@ export default gql`
     following: [User]
     followers: [User]
     password: String!
+    totalFollowing: Int!
+    totalFollowers: Int!
+    isMe: Boolean!
+    isFollowing: Boolean!
   }
 `;
