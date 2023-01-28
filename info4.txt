@@ -378,3 +378,28 @@ await client.user.update({
 
       return exists.length;
 
+#4.29
+- Search User
+-- user or query
+-- user cursor
+ client.user.findMany({
+        where: {
+          OR: [
+            {
+              userName: {
+                startsWith: keyword,
+                mode: "insensitive",
+              },
+            },
+            {
+              userName: {
+                endsWith: keyword,
+                mode: "insensitive",
+              },
+            },
+          ],
+        },
+        take: 5,
+        skip: lastId ? 1 : 0,
+        ...(lastId && { cursor: { id: lastId } }),
+      }),
