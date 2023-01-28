@@ -252,8 +252,37 @@ await client.user.update({
   },
 
 
+#4.23 follow pagination 1
 
+- two ways to see followers
+-- using some
+ const aFollowers = await client.user
+        .findUnique({
+          where: { userName },
+        })
+        .followers();
+      console.log(aFollowers);
+    
+      const bFollowers = await client.user.findMany({
+        where : {
+            following : {
+                some : {
+                    userName
+                }
+            }
+        }
 
+-- use skip or take param for pagination
 
+      const followers = await client.user
+        .findUnique({
+          where: { userName },
+        })
+        .followers({
+          take: 5,
+          skip: (page - 1) * 5,
+        });
 
+# 4.24 follow pagination 2
 
+-
