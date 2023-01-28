@@ -285,4 +285,13 @@ await client.user.update({
 
 # 4.24 follow pagination 2
 
--
+- count 
+      const totalFollowers = await client.user.count({
+        where: { following: { some: { userName } } },
+      });
+
+- use select to reduce output
+      const ok = await client.user.findUnique({
+        where: { userName },
+        select: { id: true },
+      });
