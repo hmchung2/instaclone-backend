@@ -1,0 +1,27 @@
+#5.0 typescript
+- install
+npm i typescript ts-node --save-dev
+
+- delete babel_config.json and put script in package.json as following
+"dev": "nodemon --exec ts-node src/server --delay 2",
+
+- touch tsconfig.json and put following
+{
+    "compilerOptions": {
+        "outDir" : "./built",
+        "allowJs" : true,
+        "target": "ES5",
+        "esModuleInterop": true,
+    },
+    "include": ["./src/**/*"]
+}
+
+- change files into ts
+
+- change schema.ts from *.js to *.ts
+
+- create types.d.ts
+
+#5.2 Typescript 2
+
+- create types in types.d.ts and fix server.js
