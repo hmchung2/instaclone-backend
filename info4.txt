@@ -217,3 +217,43 @@ app.use(express.static("folder name"));
 -- they have to same name (Ex. FollowRelation) to keep the following relation
 
 - you can see relationship and edit relation in prisma studio
+
+
+
+#4.21 -22 Follower conti
+
+- connect or disconnect param to update following relation
+
+await client.user.update({
+        where: {
+          id: loggedInUser.id,
+        },
+        data: {
+          following: {
+            connect: {
+              userName,
+            },
+          },
+        },
+      });
+
+- following relation returns null in query, but can change it by include (not recommended for large data)
+  Query: {
+    seeProfile: (_, { userName }) =>
+      client.user.findUnique({
+        where: {
+          userName,
+        },
+        include: {
+          following: true,
+          followers: true,
+        },
+      }),
+  },
+
+
+
+
+
+
+
