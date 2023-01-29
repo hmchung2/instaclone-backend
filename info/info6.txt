@@ -20,3 +20,21 @@
             },
           },
         });
+
+- fix computed fields by editing resolvers of the type
+
+  Photo: {
+    user: ({ userId }) => {
+      return client.user.findUnique({ where: { id: userId } });
+    },
+    hashtags: ({ id }) =>
+      client.hashtag.findMany({
+        where: {
+          photos: {
+            some: {
+              id,
+            },
+          },
+        },
+      }),
+  },
