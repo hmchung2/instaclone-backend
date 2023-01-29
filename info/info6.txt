@@ -1,0 +1,22 @@
+
+- use connectorcreate to create relationship easily instead of search all db if it already exists
+-- find where hashtag is food
+-- if it does not exist then create it
+ client.photo.create({
+          data: {
+            file,
+            caption,
+            hashtags: {
+              connectOrCreate: [
+                {
+                  where: {
+                    hashtag: "#food",
+                  },
+                  create: {
+                    hashtag: "#food",
+                  },
+                },
+              ],
+            },
+          },
+        });
