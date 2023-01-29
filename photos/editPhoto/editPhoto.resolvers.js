@@ -19,7 +19,7 @@ export default {
         if (!oldPhoto) {
           return { ok: false, error: "photo not found" };
         }
-        const photo = await client.photo.update({
+        await client.photo.update({
           where: { id },
           data: {
             caption,
