@@ -38,3 +38,41 @@
         },
       }),
   },
+
+
+- send argument in field
+typedefs
+  type Hashtag {
+    id: Int!
+    hashtag: String!
+    photos(page: Int): [Photo]
+    totalPhotos: Int!
+    createdAt: String!
+    updatedAt: String!
+  }
+
+- you can send arguments and context as well in the fields
+resolvers
+  Hashtag: {
+    photos: ({ id }, { page }, { loggedInUser }) => {
+      client.hashtag
+        .findUnique({
+          where: {
+            id,
+          },
+        })
+        .photos();
+    },
+
+- disconnect and create new connection (hashtags)
+
+const photo = await client.photo.update({
+    where: { id },
+    data: {
+    caption,
+    hashtags: {
+        disconnect: oldPhoto.hashtags,
+        connectOrCreate: processHashtags(caption),
+    },
+    },
+});
