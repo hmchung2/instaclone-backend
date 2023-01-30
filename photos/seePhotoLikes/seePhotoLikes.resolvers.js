@@ -3,7 +3,7 @@ import client from "../../client";
 export default {
   Query: {
     seePhotoLikes: async (_, { id }) => {
-      const likes = client.like.findMany({
+      const likes = await client.like.findMany({
         where: {
           photoId: id,
         },
