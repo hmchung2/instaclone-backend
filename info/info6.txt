@@ -84,3 +84,9 @@ npm i -D prettier-plugin-prisma
 - select vs include
 -- select filters and include tells prisma to load the field as well
 
+- use info to fix protectedResolver to fix output
+-- shows if operation is query or mutation
+
+(ourResolver) => (root, args, context, info) => {
+  const query = info.operation.operation === "query";
+}
