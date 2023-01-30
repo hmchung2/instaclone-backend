@@ -90,3 +90,11 @@ npm i -D prettier-plugin-prisma
 (ourResolver) => (root, args, context, info) => {
   const query = info.operation.operation === "query";
 }
+
+
+
+- upload photo to AWS
+-- install 
+npm i aws-sdk
+
+-- create account
