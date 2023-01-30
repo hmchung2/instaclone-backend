@@ -79,3 +79,8 @@ const photo = await client.photo.update({
 
 - install prisma autocomplete
 npm i -D prettier-plugin-prisma
+
+
+- select vs include
+-- select filters and include tells prisma to load the field as well
+
