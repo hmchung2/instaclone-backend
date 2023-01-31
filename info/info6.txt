@@ -98,3 +98,46 @@ npm i -D prettier-plugin-prisma
 npm i aws-sdk
 
 -- create account
+
+-- set region
+
+-- go to iam and click user to add user
+
+-- attach existing policies (use S3 full access)
+
+-- create and generate key by clicking to the new user and "create access key"
+
+-- go to S3
+
+-- create a bucket
+
+-- allow acls in bucket
+
+- aws config
+
+AWS.config.update({
+  credentials: {
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_SECRET,
+  },
+});
+
+-- upload code
+
+export const uploadToS3 = async (file, userId) => {
+  const { filename, createReadStream } = await file;
+  const readStream = createReadStream();
+  const objectName = `${userId}-${Date.now()}-${filename}`;
+  const upload = await new AWS.S3()
+    .upload({
+      Bucket: "instaclone-uploads-hmchung",
+      Key: objectName,
+      ACL: "public-read",
+      Body: readStream,
+    })
+    .promise();
+  console.log(upload);
+  return upload.Location;
+};
+
+
