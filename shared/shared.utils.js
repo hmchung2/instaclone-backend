@@ -21,3 +21,17 @@ export const uploadToS3 = async (file, userId, folderName) => {
     .promise();
   return Location;
 };
+
+// AWS S3 버킷에서 사진을 삭제하는 함수
+export const handleDeletePhotoFromAWS = async (fileUrl, folderName) => {
+  const decodedUrl = decodeURI(fileUrl);
+  const filePath = decodedUrl.split("/" + folderName + "/")[1];
+  const fileName = `${folderName}/${filePath}`;
+
+  await new AWS.S3()
+    .deleteObject({
+      Bucket: "instaclone-uploads-hmchung", // 본인 버킷 이름
+      Key: fileName,
+    })
+    .promise();
+};

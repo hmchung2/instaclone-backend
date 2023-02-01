@@ -1,0 +1,8 @@
+-nodejs graphql is not good at performance for real time message
+
+-- good language is erlang etc...
+
+# real time messenger
+- create a room
+
+- use many to many relation
