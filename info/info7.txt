@@ -6,3 +6,38 @@
 - create a room
 
 - use many to many relation
+
+- in send message 
+-- also check if following relation
+
+
+# real time message
+
+- use PubSub engine
+
+- PubSub is only for dev. For production , Redis which is the same as PubSub but just costing money
+-- put  apollo.installSubscriptionHandlers  in server.js to install web socket knowledge into our server
+--const httpServer = http.createServer(app);
+apollo.installSubscriptionHandlers(httpServer);
+
+httpServer.listen(PORT, () => {
+});
+
+
+-- now server handles two protocols http and ws. So request must be checked
+
+const apollo = new ApolloServer({
+  resolvers,
+  typeDefs,
+  context: async ({ req }) => {
+    if (req) {
+      return {
+        loggedInUser: await getUser(req.headers.token),
+      };
+    }
+  },
+});
+
+- now publish data in the websocket
+-- use same name as mutiation name for key of the data
+ pubsub.publish(NEW_MESSAGE, { roomUpdates: { ...message } });
