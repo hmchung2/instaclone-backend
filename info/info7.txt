@@ -41,3 +41,18 @@ const apollo = new ApolloServer({
 - now publish data in the websocket
 -- use same name as mutiation name for key of the data
  pubsub.publish(NEW_MESSAGE, { roomUpdates: { ...message } });
+
+
+- subscribe resolver manage datasource
+
+  Subscription: {
+    roomUpdates: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator(NEW_MESSAGE),
+        ({ roomUpdates }, { id }) => {
+          return roomUpdates.roomId === id;
+        }
+      ),
+    },
+  },
+};
