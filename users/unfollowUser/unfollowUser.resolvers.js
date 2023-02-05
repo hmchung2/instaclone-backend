@@ -4,9 +4,9 @@ import { protectedResolver } from "../users.utils";
 export default {
   Mutation: {
     unfollowUser: protectedResolver(
-      async (_, { userName }, { loggedInUser }) => {
+      async (_, { username }, { loggedInUser }) => {
         const ok = await client.user.findUnique({
-          where: { userName },
+          where: { username },
         });
         if (!ok) {
           return {
@@ -20,7 +20,7 @@ export default {
           data: {
             following: {
               disconnect: {
-                userName,
+                username,
               },
             },
           },

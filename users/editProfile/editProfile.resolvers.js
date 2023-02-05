@@ -12,7 +12,7 @@ export default {
         {
           firstName,
           lastName,
-          userName,
+          username,
           email,
           password: newPassword,
           bio,
@@ -58,7 +58,7 @@ export default {
           data: {
             firstName,
             lastName,
-            userName,
+            username,
             email,
             bio,
             ...(uglyPassword && { password: uglyPassword }),

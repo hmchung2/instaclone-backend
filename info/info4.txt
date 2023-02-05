@@ -9,7 +9,7 @@ npx prisma db push
 -- or Example
 const existingUser = await client.user.findFirst({
 where: {
-    OR: [{ userName }, { email }],
+    OR: [{ username }, { email }],
 },
 });
 
@@ -62,7 +62,7 @@ client.user.update({
         data: {
           firstName,
           lastName,
-          userName,
+          username,
           email,
           password,
         },
@@ -231,7 +231,7 @@ await client.user.update({
         data: {
           following: {
             connect: {
-              userName,
+              username,
             },
           },
         },
@@ -239,10 +239,10 @@ await client.user.update({
 
 - following relation returns null in query, but can change it by include (not recommended for large data)
   Query: {
-    seeProfile: (_, { userName }) =>
+    seeProfile: (_, { username }) =>
       client.user.findUnique({
         where: {
-          userName,
+          username,
         },
         include: {
           following: true,
@@ -258,7 +258,7 @@ await client.user.update({
 -- using some
  const aFollowers = await client.user
         .findUnique({
-          where: { userName },
+          where: { username },
         })
         .followers();
       console.log(aFollowers);
@@ -267,7 +267,7 @@ await client.user.update({
         where : {
             following : {
                 some : {
-                    userName
+                    username
                 }
             }
         }
@@ -276,7 +276,7 @@ await client.user.update({
 
       const followers = await client.user
         .findUnique({
-          where: { userName },
+          where: { username },
         })
         .followers({
           take: 5,
@@ -287,12 +287,12 @@ await client.user.update({
 
 - count 
       const totalFollowers = await client.user.count({
-        where: { following: { some: { userName } } },
+        where: { following: { some: { username } } },
       });
 
 - use select to reduce output
       const ok = await client.user.findUnique({
-        where: { userName },
+        where: { username },
         select: { id: true },
       });
 
@@ -302,7 +302,7 @@ await client.user.update({
 -- tell db where the last select result was
       const following = await client.user
         .findUnique({
-          where: { userName },
+          where: { username },
         })
         .following({
           take: 5,
@@ -369,7 +369,7 @@ await client.user.update({
         return false;
       }
       const exists = await client.user
-        .findUnique({ where: { userName: loggedInUser.userName } })
+        .findUnique({ where: { username: loggedInUser.username } })
         .following({
           where: {
             id,
@@ -386,13 +386,13 @@ await client.user.update({
         where: {
           OR: [
             {
-              userName: {
+              username: {
                 startsWith: keyword,
                 mode: "insensitive",
               },
             },
             {
-              userName: {
+              username: {
                 endsWith: keyword,
                 mode: "insensitive",
               },

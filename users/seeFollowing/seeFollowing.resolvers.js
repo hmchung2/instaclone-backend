@@ -2,9 +2,9 @@ import client from "../../client";
 
 export default {
   Query: {
-    seeFollowing: async (_, { userName, lastId }) => {
+    seeFollowing: async (_, { username, lastId }) => {
       const ok = await client.user.findUnique({
-        where: { userName },
+        where: { username },
         select: { id: true },
       });
 
@@ -16,7 +16,7 @@ export default {
       }
       const following = await client.user
         .findUnique({
-          where: { userName },
+          where: { username },
         })
         .following({
           take: 5,

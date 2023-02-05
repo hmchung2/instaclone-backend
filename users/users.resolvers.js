@@ -35,7 +35,7 @@ export default {
         return false;
       }
       //   const exists = await client.user
-      //     .findUnique({ where: { userName: loggedInUser.userName } })
+      //     .findUnique({ where: { username: loggedInUser.username } })
       //     .following({
       //       where: {
       //         id,
@@ -44,7 +44,7 @@ export default {
       //   return exists.length !== 0;
       const exists = await client.user.count({
         where: {
-          userName: loggedInUser.userName,
+          username: loggedInUser.username,
           following: {
             some: {
               id,

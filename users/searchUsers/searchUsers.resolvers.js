@@ -7,13 +7,13 @@ export default {
         where: {
           OR: [
             {
-              userName: {
+              username: {
                 startsWith: keyword,
                 mode: "insensitive",
               },
             },
             {
-              userName: {
+              username: {
                 endsWith: keyword,
                 mode: "insensitive",
               },

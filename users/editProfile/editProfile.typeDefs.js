@@ -5,7 +5,7 @@ export default gql`
     editProfile(
       firstName: String
       lastName: String
-      userName: String
+      username: String
       email: String
       password: String
       bio: String
