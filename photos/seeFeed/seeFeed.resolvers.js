@@ -3,8 +3,10 @@ import { protectedResolver } from "../../users/users.utils";
 
 export default {
   Query: {
-    seeFeed: protectedResolver((_, __, { loggedInUser }) =>
+    seeFeed: protectedResolver((_, { offset }, { loggedInUser }) =>
       client.photo.findMany({
+        take: offset ? 2 : 10000,
+        skip: offset ? offset : 0,
         where: {
           OR: [
             {
