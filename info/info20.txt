@@ -1,0 +1,29 @@
+# build
+
+-babel-cli
+allow run from package.json
+npm i @babel/cli --dev-only
+
+- create SRC folder and move everything into src folder
+
+- put command in package json
+ "build" : "babel src --out-dir build"
+
+ - run "npm run build"
+
+ - put command in package.json
+
+ - error shows up
+ needs : regenerator-runtime allows to use async function
+
+ - install regenerator
+ npm i regenerator-runtime
+ npm install --save-dev @babel/plugin-transform-runtime
+
+ - configure plugin
+ {
+  "plugins" : ["@babel/plugin-transform-runtime"] in babel.config.json
+ }
+
+ !!!now our code ready to run on server!!!
+ 

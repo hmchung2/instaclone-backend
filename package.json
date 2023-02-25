@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
-    "dev": "nodemon --exec babel-node server --delay 2",
+    "dev": "nodemon --exec babel-node src/server --delay 2",
     "migrate": "npx prisma migrate dev --preview-feature",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "build": "babel src --out-dir build",
+    "start": "node build/server"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/hmchung2/instaclone-backend#readme",
   "dependencies": {
+    "@babel/cli": "^7.21.0",
     "@prisma/client": "^2.15.0",
     "apollo-server": "^2.19.1",
     "aws-sdk": "^2.1304.0",
@@ -35,6 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.12.11",
     "nodemon": "^2.0.7",
     "prettier-plugin-prisma": "^4.9.0",
