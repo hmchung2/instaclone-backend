@@ -1,3 +1,6 @@
+PaaS Platforms
+Heroku
+
 # build
 
 -babel-cli
@@ -68,3 +71,25 @@ run
 heroku logs --tail
 
 - enable playground for graphql
+server.js
+playground: true,
+
+- to fix 400 Apollo server error in the plaground
+server.js
+
+
+- look through .env to config variables in heroku stylelintcache
+ex PORT : 23763
+
+- configure database
+go to resouse tab in heroku and go to add on
+then i guess buy heroku-postgress
+
+
+- migrate databse to server
+- prisma migrate deploy
+
+-release phase
+-- create Procfile and put following lines
+release: npx prisma migrate deploy
+web: npm start  <-- check resource from dashboard
