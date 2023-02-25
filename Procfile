@@ -1,2 +1,2 @@
-release: npx prisma db push
+release: npx prisma migrate deploy
 web: npm start
