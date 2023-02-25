@@ -27,3 +27,15 @@ npm i @babel/cli --dev-only
 
  !!!now our code ready to run on server!!!
  
+
+ # deploy
+
+ - go to heroku
+
+ - download heroku and login
+
+ - remote heroku
+ heroku git:remote -a instaclone-backend-hm
+
+ -check
+ git remote -v
