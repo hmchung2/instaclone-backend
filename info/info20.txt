@@ -41,3 +41,14 @@ npm i @babel/cli --dev-only
  git remote -v
 
 -- heroku runs build command from packaage.json
+
+
+
+-- build into heroku
+
+(if you didnt init yet)$ git init 
+$ heroku git:remote -a instaclone-backend-hm
+
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
