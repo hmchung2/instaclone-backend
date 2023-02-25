@@ -53,7 +53,7 @@ export default {
             payload,
             room: {
               connect: {
-                id: room.id,
+                id: roomId,
               },
             },
             user: {
@@ -64,9 +64,12 @@ export default {
           },
         });
 
+        console.log("message : ");
+        console.log(message);
+
         pubsub.publish(NEW_MESSAGE, { roomUpdates: { ...message } });
 
-        return { ok: true };
+        return { ok: true, id: message.id };
       }
     ),
   },

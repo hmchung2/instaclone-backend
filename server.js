@@ -5,9 +5,6 @@ import logger from "morgan";
 import { ApolloServer } from "apollo-server-express";
 import { typeDefs, resolvers } from "./schema";
 import { getUser } from "./users/users.utils";
-// import pubsub from "./pubsub";
-
-// console.log(pubsub);
 
 const PORT = process.env.PORT;
 const apollo = new ApolloServer({
@@ -15,21 +12,32 @@ const apollo = new ApolloServer({
   typeDefs,
   context: async (ctx) => {
     if (ctx.req) {
+      console.log("ctx.req");
       return {
         loggedInUser: await getUser(ctx.req.headers.token),
       };
     } else {
+      const {
+        connection: { context },
+      } = ctx;
+      console.log("context ~~");
+      console.log(context);
+
       return {
-        loggedInUser: ctx.connection.context.loggedInUser,
+        loggedInUser: context.loggedInUser,
       };
     }
   },
   subscriptions: {
     onConnect: async ({ token }) => {
       if (!token) {
-        throw new Error("You can't Listen");
+        throw new Error("You can't listen.");
       }
+      console.log("token~~~~~~~~~");
+      console.log(token);
       const loggedInUser = await getUser(token);
+      console.log("Logged~~~~~~~~~~~");
+      console.log(loggedInUser);
       return {
         loggedInUser,
       };
@@ -39,8 +47,8 @@ const apollo = new ApolloServer({
 
 const app = express();
 // app.use(logger("tiny"));
-app.use("/static", express.static("uploads"));
 apollo.applyMiddleware({ app });
+app.use("/static", express.static("uploads"));
 
 const httpServer = http.createServer(app);
 apollo.installSubscriptionHandlers(httpServer);

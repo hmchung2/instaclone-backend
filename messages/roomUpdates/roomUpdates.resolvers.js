@@ -7,12 +7,15 @@ export default {
   Subscription: {
     roomUpdates: {
       subscribe: async (root, args, context, info) => {
+        console.log("000");
+        console.log(args);
+        console.log(context.loggedInUser);
         const room = await client.room.findFirst({
           where: {
             id: args.id,
             users: {
               some: {
-                id: context.logggedInUser.id,
+                id: context.loggedInUser.id,
               },
             },
           },
@@ -20,20 +23,21 @@ export default {
             id: true,
           },
         });
+        console.log("happening?");
         if (!room) {
-          throw new Error("You shall not see this");
+          throw new Error("You shall not see this.");
         }
-
+        console.log("happening2222");
         return withFilter(
           () => pubsub.asyncIterator(NEW_MESSAGE),
-          async ({ roomUpdates }, { id }, { logggedInUser }) => {
+          async ({ roomUpdates }, { id }, { loggedInUser }) => {
             if (roomUpdates.roomId === id) {
               const room = await client.room.findFirst({
                 where: {
                   id,
                   users: {
                     some: {
-                      id: logggedInUser.id,
+                      id: loggedInUser.id,
                     },
                   },
                 },
@@ -52,10 +56,3 @@ export default {
     },
   },
 };
-
-// subscribe: withFilter(
-//   () => pubsub.asyncIterator(NEW_MESSAGE),
-//   ({ roomUpdates }, { id }) => {
-//     return roomUpdates.roomId === id;
-//   }
-// ),

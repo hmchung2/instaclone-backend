@@ -4,16 +4,21 @@ import client from "../client";
 export const getUser = async (token) => {
   try {
     if (!token) {
+      console.log("token input null");
       return null;
     }
     const { id } = await jwt.verify(token, process.env.SECRET_KEY);
     const user = await client.user.findUnique({ where: { id } });
+    console.log("user from token");
+    console.log(user);
     if (user) {
       return user;
     } else {
+      console.log("null output from token");
       return null;
     }
-  } catch {
+  } catch (error) {
+    console.log("Error from getUser : ", error);
     return null;
   }
 };

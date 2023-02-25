@@ -3,10 +3,10 @@ import { protectedResolver } from "../../users/users.utils";
 
 export default {
   Query: {
-    seeFeed: protectedResolver((_, { offset }, { loggedInUser }) =>
-      client.photo.findMany({
-        take: offset ? 2 : 10000,
-        skip: offset ? offset : 0,
+    seeFeed: protectedResolver((_, { offset }, { loggedInUser }) => {
+      return client.photo.findMany({
+        take: 2,
+        skip: offset,
         where: {
           OR: [
             {
@@ -26,7 +26,7 @@ export default {
         orderBy: {
           createdAt: "desc",
         },
-      })
-    ),
+      });
+    }),
   },
 };
