@@ -93,3 +93,5 @@ then i guess buy heroku-postgress
 -- create Procfile and put following lines
 release: prisma migrate deploy
 web: npm start  <-- check resource from dashboard
+
+try build
