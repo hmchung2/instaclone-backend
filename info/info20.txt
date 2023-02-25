@@ -52,3 +52,19 @@ $ heroku git:remote -a instaclone-backend-hm
 $ git add .
 $ git commit -am "make it better"
 $ git push heroku master
+
+
+-- heroku looks also package-lock.json
+-- so  run
+delete 
+npm i
+git add .
+git commit -am "message"
+git push heroku master
+
+
+-- to view log
+run
+heroku logs --tail
+
+- enable playground for graphql

@@ -9,6 +9,7 @@ import { getUser } from "./users/users.utils";
 const PORT = process.env.PORT;
 const apollo = new ApolloServer({
   resolvers,
+  playground: true,
   typeDefs,
   context: async (ctx) => {
     if (ctx.req) {
