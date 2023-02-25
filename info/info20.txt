@@ -39,3 +39,5 @@ npm i @babel/cli --dev-only
 
  -check
  git remote -v
+
+-- heroku runs build command from packaage.json
