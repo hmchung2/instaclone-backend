@@ -97,7 +97,7 @@ web: npm start  <-- check resource from dashboard
 try build
 
 
-migrate prisma
+#migrate prisma
 
 heroku login
 sudo snap install --classic heroku.
@@ -106,3 +106,8 @@ npm install prisma -g.
 npx prisma migrate deploy.
 Follow the prompts to complete the migration.
 Note: Make sure you have added the heroku/nodejs buildpack and specified the correct version of Node.js in your package.json file before running the migration.
+
+
+#you can also set automatic deploy in your git branch on heroku website
+
+
