@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions && npm install prisma@2.30.3 -g",
+    "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions && npm install prisma@2.30.3 -g",
     "dev": "nodemon --exec babel-node src/server --delay 2",
     "migrate": "npx prisma migrate dev --preview-feature",
     "studio": "npx prisma studio",
@@ -48,5 +48,10 @@
   "resolutions": {
     "fs-capacitor": "^6.2.0",
     "graphql-upload": "^11.0.0"
+  },
+  "engines": {
+    "node": "14.15.1",
+    "npm": "6.14.8",
+    "openssl": "1.1.1"
   }
 }
