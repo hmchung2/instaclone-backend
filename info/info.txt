@@ -135,3 +135,8 @@ npm i dotenv
 -- add import dotenv at top in application
 
 -- now you can chage ports in .env file
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+## instaclone is very very sensitive to your local node npm version!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
